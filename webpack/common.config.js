@@ -43,5 +43,5 @@ module.exports = {
       name: ['app', 'vendor'],
       minChunks: Infinity,
     }),
-  ],
+  ]
 };
