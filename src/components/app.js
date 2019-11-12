@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-//import { Library } from "@fortawesome/react-fontawesome-svg-core";
-import { FortAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -15,9 +13,6 @@ import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
 import Icons from "../helpers/icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
-
-library.add(faTrash, faSignOutAlt);
 
 export default class App extends Component {
   constructor(props) {
@@ -126,10 +121,19 @@ export default class App extends Component {
                 )}
               />
 
-              <Route path="/b/:slug" component={BlogDetail} />
-              {this.state.loggedInStatus === "LOGGED_IN" ? (
-                this.authorizedPages()
-              ) : null}
+              <Route
+                path="/b/:slug"
+                render={props => (
+                  <BlogDetail
+                    {...props}
+                    loggedInStatus={this.state.loggedInStatus}
+                  />
+                )}
+              />
+
+              {this.state.loggedInStatus === "LOGGED_IN"
+                ? this.authorizedPages()
+                : null}
               <Route
                 exact
                 path="/portfolio/:slug"

@@ -28,20 +28,20 @@ module.exports = {
         options: {
           name: '[path][name].[ext]',
           publicPath: '/',
-        },
+        }
       },
 
       {
         test: /\.(mp4|webm)$/,
         loader: 'url?limit=10000',
-      },
-    ],
+      }
+    ]
   },
 
   plugins: [
     new SplitChunksPlugin({
       name: ['app', 'vendor'],
       minChunks: Infinity,
-    }),
+    })
   ]
 };
